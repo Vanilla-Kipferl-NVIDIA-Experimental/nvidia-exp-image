@@ -21,7 +21,7 @@ jobs:
     - name: Verify Base Image Integrity
       if: ${{ github.ref_type == 'tag' }}
       run:
-        gh attestation verify oci://ghcr.io/vanilla-os/gnome:latest --owner Vanilla-OS
+        gh attestation verify oci://ghcr.io/vanilla-kde/kde:latest --owner Vanilla-KDE
       env:
         GH_TOKEN: ${{ github.token }}
 
@@ -50,7 +50,7 @@ jobs:
         else
           TAG="${{ github.ref_name }}"
         fi
-        sed "s/ghcr.io\/vanilla-os\/gnome:latest/ghcr.io\/vanilla-os\/gnome:$TAG/" -i recipe.yml
+        sed "s/ghcr.io\/vanilla-kde\/kde:latest/ghcr.io\/vanilla-kde\/kde:$TAG/" -i recipe.yml
 
     - uses: vanilla-os/vib-gh-action@v1.1.0
       with:
@@ -66,7 +66,7 @@ jobs:
       run: |
         REPO_OWNER_LOWERCASE="$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
         echo "REPO_OWNER_LOWERCASE=$REPO_OWNER_LOWERCASE" >> "$GITHUB_ENV"
-        echo "IMAGE_URL=ghcr.io/$REPO_OWNER_LOWERCASE/gnome-nvidia-modern" >> "$GITHUB_ENV"
+        echo "IMAGE_URL=ghcr.io/$REPO_OWNER_LOWERCASE/kipferl-nvidia-modern" >> "$GITHUB_ENV"
 
     - name: Docker meta
       id: meta
@@ -136,7 +136,7 @@ jobs:
       run: |
         REPO_OWNER_LOWERCASE="$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')"
         echo "REPO_OWNER_LOWERCASE=$REPO_OWNER_LOWERCASE" >> "$GITHUB_ENV"
-        echo "IMAGE_URL=ghcr.io/$REPO_OWNER_LOWERCASE/gnome-nvidia-modern" >> "$GITHUB_ENV"
+        echo "IMAGE_URL=ghcr.io/$REPO_OWNER_LOWERCASE/kipferl-nvidia-modern" >> "$GITHUB_ENV"
 
     - name: Download digests
       uses: actions/download-artifact@v4
@@ -154,7 +154,7 @@ jobs:
       if: ${{ github.ref_type == 'tag' }}
       run: |
         echo "EXTRA_TAG=raw,latest" >> "$GITHUB_ENV"
-        echo "IMAGE_TAG_LEGACY=${IMAGE_URL/gnome-nvidia-modern/nvidia-exp}:main" >> "$GITHUB_ENV"
+        echo "IMAGE_TAG_LEGACY=${IMAGE_URL/kipferl-nvidia-modern/nvidia-exp}:main" >> "$GITHUB_ENV"
 
     - name: Docker meta
       id: meta

@@ -1,10 +1,10 @@
-name: Vanilla GNOME NVIDIA Modern
-id: gnome-nvidia-modern
+name: Vanilla Kipferl NVIDIA Modern
+id: kipferl-nvidia-modern
 vibversion: 1.1.0
 
 stages:
 - id: build
-  base: ghcr.io/vanilla-os/gnome:latest
+  base: ghcr.io/vanilla-kde/kde:dev
   addincludes: true
   singlelayer: false
   labels:
